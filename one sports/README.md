@@ -28,7 +28,6 @@ one-sports/
 │   │   └── variables.css    # CSS variables or theming
 │   ├── utils/               # Utility/helper functions
 │   │   ├── formatDate.ts    # Example: Format dates for articles
-│   │   └── getExcerpt.ts    # Example: Generate article excerpts
 ├── package.json
 ├── tsconfig.json
 ├── next.config.js
@@ -56,7 +55,7 @@ Handles interaction with third-party APIs. This is where functions to fetch arti
 Contains global and reusable styles for the app. (Optional)
 
 ### `utils/`
-Holds helper functions like formatting dates or generating excerpts for articles.
+Holds helper functions like formatting dates.
 
 ---
 
@@ -66,6 +65,8 @@ Holds helper functions like formatting dates or generating excerpts for articles
 Defines the root layout, including shared UI elements.
 
 ```tsx
+import { ReactNode } from "react"
+
 // components
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
