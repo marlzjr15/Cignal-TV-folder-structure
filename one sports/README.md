@@ -23,7 +23,7 @@ my-sports-app/
 │   ├── services/            # API interaction logic
 │   │   ├── apiClient.ts     # Axios or Fetch setup
 │   │   └── sportsService.ts # Functions for fetching articles, categories, etc.
-│   ├── styles/              # CSS/SCSS or Tailwind configuration
+│   ├── styles/              # (Optional) CSS/SCSS or Tailwind configuration
 │   │   ├── globals.css      # Global styles
 │   │   └── variables.css    # CSS variables or theming
 │   ├── utils/               # Utility/helper functions
@@ -53,7 +53,7 @@ This is the primary directory for routing and UI rendering using the Next.js App
 Handles interaction with third-party APIs. This is where functions to fetch articles, categories, and other data are implemented.
 
 ### `styles/`
-Contains global and reusable styles for the app.
+Contains global and reusable styles for the app. (Optional)
 
 ### `utils/`
 Holds helper functions like formatting dates or generating excerpts for articles.
@@ -63,12 +63,12 @@ Holds helper functions like formatting dates or generating excerpts for articles
 ## **Code Samples**
 
 ### `app/layout.tsx`
-Defines the root layout, including global styles and shared UI elements.
+Defines the root layout, including shared UI elements.
 
 ```tsx
-import "../styles/globals.css";
-import Header from "./components/Header";
-import Footer from "./components/Footer";
+// components
+import Header from '@/components/Header'
+import Footer from '@/components/Footer'
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
@@ -79,7 +79,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Footer />
       </body>
     </html>
-  );
+  )
 }
 ```
 
@@ -87,14 +87,14 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 Homepage that fetches and displays the latest sports articles.
 
 ```tsx
-import ArticleCard from "./components/ArticleCard";
+// service
+import apiClient from '@/services/apiClient'
+
+// component
+import ArticleCard from '@/components/ArticleCard'
 
 export default async function HomePage() {
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_API_BASE_URL}/sports/latest`,
-    { cache: "no-store" }
-  );
-  const articles = await res.json();
+  const articles = await apiClient.get('/sports/latest')
 
   return (
     <div>
@@ -105,11 +105,7 @@ export default async function HomePage() {
         ))}
       </div>
     </div>
-  );
+  )
 }
 ```
 ---
-
-## **Conclusion**
-
-This structure is optimized for modern Next.js development using the App Router. It leverages Server Components, dynamic routing, and layouts to create a scalable and maintainable sports news app.
