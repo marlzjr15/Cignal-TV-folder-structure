@@ -1,0 +1,115 @@
+# One Sports
+
+## **Project Structure**
+
+```plaintext
+my-sports-app/
+├── public/                  # Static assets (logos, images, etc.)
+├── src/
+│   ├── app/
+│   │   ├── layout.tsx       # Root layout (Header, Footer)
+│   │   ├── page.tsx         # Home page (Latest sports articles)
+│   │   ├── [category]/      # Dynamic route for sports categories (e.g., Football, Basketball)
+│   │   │   ├── page.tsx     # Category page
+│   │   │   ├── layout.tsx   # Optional category-specific layout
+│   │   ├── article/         # Dynamic route for individual articles
+│   │   │   ├── [id]/        # Article details page
+│   │   │   │   ├── page.tsx # Article details
+│   │   └── components/      # Reusable components (Header, Footer, ArticleCard, etc.)
+│   │       ├── Header.tsx
+│   │       ├── Footer.tsx
+│   │       ├── ArticleCard.tsx
+│   │       └── LoadingSpinner.tsx
+│   ├── services/            # API interaction logic
+│   │   ├── apiClient.ts     # Axios or Fetch setup
+│   │   └── sportsService.ts # Functions for fetching articles, categories, etc.
+│   ├── styles/              # CSS/SCSS or Tailwind configuration
+│   │   ├── globals.css      # Global styles
+│   │   └── variables.css    # CSS variables or theming
+│   ├── utils/               # Utility/helper functions
+│   │   ├── formatDate.ts    # Example: Format dates for articles
+│   │   └── getExcerpt.ts    # Example: Generate article excerpts
+├── package.json
+├── tsconfig.json
+├── next.config.js
+└── README.md
+```
+
+---
+
+## **Folder Breakdown**
+
+### `app/`
+This is the primary directory for routing and UI rendering using the Next.js App Router.
+
+#### Files and Folders:
+- **`layout.tsx`**: The root layout file that defines the base structure for all pages.
+- **`page.tsx`**: The homepage, which fetches and displays the latest sports articles.
+- **`[category]/page.tsx`**: Dynamic category pages (e.g., `/football` or `/basketball`) to fetch and display articles from specific categories.
+- **`article/[id]/page.tsx`**: Dynamic article pages that fetch and display full details of a specific article.
+- **`components/`**: Reusable components like `Header`, `Footer`, and `ArticleCard`.
+
+### `services/`
+Handles interaction with third-party APIs. This is where functions to fetch articles, categories, and other data are implemented.
+
+### `styles/`
+Contains global and reusable styles for the app.
+
+### `utils/`
+Holds helper functions like formatting dates or generating excerpts for articles.
+
+---
+
+## **Code Samples**
+
+### `app/layout.tsx`
+Defines the root layout, including global styles and shared UI elements.
+
+```tsx
+import "../styles/globals.css";
+import Header from "./components/Header";
+import Footer from "./components/Footer";
+
+export default function RootLayout({ children }: { children: React.ReactNode }) {
+  return (
+    <html lang="en">
+      <body>
+        <Header />
+        <main>{children}</main>
+        <Footer />
+      </body>
+    </html>
+  );
+}
+```
+
+### `app/page.tsx`
+Homepage that fetches and displays the latest sports articles.
+
+```tsx
+import ArticleCard from "./components/ArticleCard";
+
+export default async function HomePage() {
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_API_BASE_URL}/sports/latest`,
+    { cache: "no-store" }
+  );
+  const articles = await res.json();
+
+  return (
+    <div>
+      <h1>Latest Sports News</h1>
+      <div>
+        {articles.map((article: any) => (
+          <ArticleCard key={article.id} article={article} />
+        ))}
+      </div>
+    </div>
+  );
+}
+```
+---
+
+## **Conclusion**
+
+This structure is optimized for modern Next.js development using the App Router. It leverages Server Components, dynamic routing, and layouts to create a scalable and maintainable sports news app.
