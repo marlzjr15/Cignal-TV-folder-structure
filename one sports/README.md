@@ -3,7 +3,7 @@
 ## **Project Structure**
 
 ```plaintext
-my-sports-app/
+one-sports/
 ├── public/                  # Static assets (logos, images, etc.)
 ├── src/
 │   ├── app/
