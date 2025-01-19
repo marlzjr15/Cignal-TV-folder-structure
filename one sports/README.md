@@ -15,11 +15,11 @@ one-sports/
 │   │   ├── article/         # Dynamic route for individual articles
 │   │   │   ├── [id]/        # Article details page
 │   │   │   │   ├── page.tsx # Article details
-│   │   └── components/      # Reusable components (Header, Footer, ArticleCard, etc.)
-│   │       ├── Header.tsx
-│   │       ├── Footer.tsx
-│   │       ├── ArticleCard.tsx
-│   │       └── LoadingSpinner.tsx
+│   ├── components/          # Reusable components (Header, Footer, ArticleCard, etc.)
+│   │   ├── Header.tsx
+│   │   ├── Footer.tsx
+│   │   ├── ArticleCard.tsx
+│   │   └── LoadingSpinner.tsx
 │   ├── services/            # API interaction logic
 │   │   ├── apiClient.ts     # Axios or Fetch setup
 │   │   └── sportsService.ts # Functions for fetching articles, categories, etc.
@@ -41,12 +41,14 @@ one-sports/
 ### `app/`
 This is the primary directory for routing and UI rendering using the Next.js App Router.
 
+### `components/`
+Holds reusable components like `Header`, `Footer`, and `ArticleCard`.
+
 #### Files and Folders:
 - **`layout.tsx`**: The root layout file that defines the base structure for all pages.
 - **`page.tsx`**: The homepage, which fetches and displays the latest sports articles.
 - **`[category]/page.tsx`**: Dynamic category pages (e.g., `/football` or `/basketball`) to fetch and display articles from specific categories.
-- **`article/[id]/page.tsx`**: Dynamic article pages that fetch and display full details of a specific article.
-- **`components/`**: Reusable components like `Header`, `Footer`, and `ArticleCard`.
+- **`article/[id]/page.tsx`**: Dynamic article pages that fetch and display full details of a specific article
 
 ### `services/`
 Handles interaction with third-party APIs. This is where functions to fetch articles, categories, and other data are implemented.
